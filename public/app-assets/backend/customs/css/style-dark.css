@@ -1,0 +1,57 @@
+#email-body {
+    background: #1e1e2d !important;
+}
+
+.single-email {
+    box-shadow: 0px 3px 6px 2px #151521 !important;
+}
+
+.table tr {
+    border-width: unset !important;
+    border-style: unset !important;
+}
+
+.table tr.unseen-email.single-email {
+    background-color: #1c1c2a !important;
+}
+
+.load::before {
+    color: #fff !important;
+}
+
+.load::after {
+    background-color: rgb(21 21 33 / 83%) !important;
+}
+
+.list-group-item {
+    background-color: #151521 !important;
+    border: 2px solid #ffffff4f !important;
+}
+
+.list-group-item .nested-sortable {
+    background-color: #1e1e2d !important;
+}
+
+.single-email.unseen-email {
+    background-color: #12121b00 !important;
+}
+
+.single-email:hover {
+    background-color: #12121b !important;
+}
+
+.single-email .symbol.symbol-circle, .symbol.symbol-circle .symbol-label, .symbol.symbol-circle>img:hover {
+    border: 1px solid #5e5e5e;
+}
+
+.swal2-container {
+    color: #000 !important;
+}
+
+.form-check-input {
+    border: 1px solid#828282 !important;
+}
+
+.card {
+    border: 2px solid #fff;
+}

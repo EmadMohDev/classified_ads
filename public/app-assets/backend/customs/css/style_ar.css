@@ -1,0 +1,38 @@
+.dropdown-language .dropdown-menu {
+    width: 155px;
+    right: -100px;
+}
+
+.copy::after {
+    right: unset;
+    left: 0;
+}
+
+.form-actions {
+    flex-direction: row-reverse !important;
+}
+
+.single-email {
+    border-left: unset;
+    border-right: 4px solid transparent;
+}
+
+.single-email.unseen-email {
+    border-left-color: unset;
+    border-right-color: #42d094 !important;
+}
+
+.single-email:hover {
+    border-left-color: unset;
+    border-right-color: #ec3030 !important;
+}
+
+.single-email.unseen-email::after {
+    content: '';
+    left: 5% !important;
+    right: unset !important;
+}
+
+.dt-button-collection {
+    right: unset;
+}
