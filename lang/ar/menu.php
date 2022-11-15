@@ -41,50 +41,15 @@ return [
     'users' => 'المستخدمين',
     'user' => 'مستخدم',
 
-    // DEPARTMENTS
-    'departments' => 'الأقسام',
-    'department' => 'قسم',
-
-    // AGGREGATORS
-    'aggregators' => 'المجمعين',
-    'aggregator' => 'مجمع',
-
-    // COUNTRIES
-    'countries' => 'البلدان',
-    'country' => 'البلد',
-
-    // OPERATORS
-    'operators' => 'الشغلين',
-    'operator' => 'مشغل',
-
-    // CATEGORIES
-    'categories' => 'الأقسام',
-    'category' => 'القسم',
-    'subs'  => 'الأقسام الفرعية',
 
     // CONTENT TYPES
     'content_types' => 'أنواع المحتوي',
     'content_type' => 'نوع المحتوي',
 
-    // CONTENTS
-    'contents' => 'المحتوي',
-    'content' => 'محتوي',
-
     // POSTS
     'posts' => 'المنشورات',
     'post' => 'منشور',
 
-    // GOVERNORATES
-    'governorates' => 'المحافظات',
-    'governorate' => 'محافظة',
-
-    // CITIES
-    'cities' => 'المدن',
-    'city' => 'مدينة',
-
-    // RBTS
-    'rbts' => 'التقطيعات',
-    'rbt' => 'تقطيع',
 
     // NOTIFICATIONS
     'notifications' => 'الإشعارات',

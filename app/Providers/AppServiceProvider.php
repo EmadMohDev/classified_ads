@@ -37,9 +37,9 @@ class AppServiceProvider extends ServiceProvider
         self::loadAllMigrations();
 
         User::observe(UserObserver::class);
-        Category::observe(CategoryObserver::class);
         Setting::observe(SettingObserver::class);
 
+        Cache::forget('list_menus') ;
         if (! app()->runningInConsole()) {
             $list_menus = Cache::remember('list_menus', 60 * 60 * 24, function () {
                 return Menu::with('visibleSubs')->parent()->getVisible()->get();

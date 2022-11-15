@@ -12,15 +12,13 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Scout\Searchable;
-use Messenger\Chat\Traits\Messageable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Searchable, Messageable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Searchable;
 
     protected $guard_name = 'web,api';
 
-    protected $with = ['aggregator', 'department', 'behalf'];
 
     /**
      * The attributes that are mass assignable.
@@ -31,18 +29,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'behalf_id',
         'image',
-        'aggregator_id',
-        'department_id',
-        'annual_credit',
-        'finger_print_id',
-        'salary_per_monthly',
-        'insurance_deduction',
         'email_verified_at',
         'remember_token',
-        'mobile_token',
-        'last_seen'
     ];
 
     /**
@@ -75,20 +64,6 @@ class User extends Authenticatable
         return $this->only(['name', 'email']);
     }
 
-    public function department()
-    {
-        return $this->belongsTo(Department::class)->select('id', 'title', 'manager_id', 'manager_of_manager_id');
-    }
-
-    public function aggregator()
-    {
-        return $this->belongsTo(Aggregator::class)->select('id', 'title');
-    }
-
-    public function behalf()
-    {
-        return $this->belongsTo(self::class, 'behalf_id')->select('id', 'name');
-    }
 
     protected function password(): Attribute
     {
@@ -110,14 +85,7 @@ class User extends Authenticatable
         });
     }
 
-    public function scopeHasManager($query)
-    {
-        return $query->when(! isSuperAdmin(), function($query) {
-            $query->whereHas('department', function($query) {
-                $query->where('manager_id', auth()->id());
-            });
-        });
-    }
+
 
     public function scopeExceptAuth($query)
     {
@@ -126,9 +94,7 @@ class User extends Authenticatable
 
     public function scopeFilter($query)
     {
-        return $query->when(request('department'), function ($query) {
-                        return $query->where('department_id', request('department'));
-                    })->when(request()->name, function ($query) {
+        return $query->when(request()->name, function ($query) {
                         return $query->where('name', 'LIKE', "%".request()->name."%");
                     })->when(request()->email, function ($query) {
                         return $query->where('email', 'LIKE', "%".request()->email."%");

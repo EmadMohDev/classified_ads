@@ -3,22 +3,29 @@
 namespace App\Http\Services;
 
 use App\Models\Post;
+use App\Traits\UploadFile;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class PostService {
+
+    use UploadFile;
 
     public function handle($request, $id = null)
     {
         try {
-            if (! isset($request['active'])) $request['active'] = 0;
 
-            $operators = $request['operator_id'];
-            unset($request['operator_id']);
-            $post = '';
 
-            foreach ($operators as $operator)
-                $post = Post::updateOrCreate(['id' => $id], array_merge($request, ['operator_id' => $operator]));
+            if(request()->image) {
+                $image = $this->uploadImage(request()->image, 'posts');
+                $request['image'] = $image;
+            }
 
+
+
+
+
+            $post = Post::updateOrCreate(['id' => $id],$request);
             return $post;
         } catch (Exception $e) {
             return $e->getMessage();

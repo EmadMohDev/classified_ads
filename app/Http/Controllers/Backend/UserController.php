@@ -9,8 +9,6 @@ use App\Http\Requests\UserRequest;
 use App\Http\Services\UserService;
 use App\Imports\UsersImport;
 use App\Jobs\TestJob;
-use App\Models\Aggregator;
-use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -58,18 +56,14 @@ class UserController extends BackendController
     public function append()
     {
         return [
-            'departments' => Department::when(request('department'), function($query) {
-                                $query->where('id', request('department'));
-                            })->pluck('title', 'id'),
             'users' => User::pluck('name', 'id'),
-            'aggregators' => Aggregator::pluck('title', 'id'),
             'roles' => Role::pluck('name', 'id')
         ];
     }
 
     public function query($id) :object|null
     {
-        return $this->model->hasManager()->find($id);
+        return $this->model->find($id);
     }
 
     public function TestRunJob()

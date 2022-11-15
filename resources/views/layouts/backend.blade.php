@@ -51,16 +51,7 @@
                     @yield('content')
 
 
-                    @if (Route::has('messenger'))
-                        <div style="position: fixed; left: 25px; bottom: 60px; z-index: 10">
-                            <div class="d-none" id='new-message' style="padding: 10px; background: #e6e6e6; border-radius: 6px; position: absolute; left: 100%; width: max-content"></div>
-                            <span class="badge badge-square badge-success p-2 h-1px w-1px position-absolute" style="top: -7px; left: -5px;" id='all-unread-messages'>{{ method_exists(auth()->user(), 'unreadMessages') ? auth()->user()->unreadMessages() : '' }}</span>
 
-                            <a href="{{ route('messenger')}}">
-                                <img style="width:35px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png">
-                            </a>
-                        </div>
-                    @endif
                 </div>
                 <!--end::Container-->
             </div>

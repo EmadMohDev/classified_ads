@@ -17,38 +17,21 @@ class PostDataTable extends DataTable
      */
     public function dataTable($query)
     {
+            // title    description  contact_phone_number  image  user_id
         return datatables()
             ->eloquent($query)
             ->addColumn('check', 'backend.includes.tables.checkbox')
-            ->editColumn('content_id', function(Post $post) {return $post->content->title;})
-            ->editColumn('operator_id', function(Post $post) {return "{$post->operator->name} - {$post->operator->country->name}";})
-            ->editColumn('active', function(Post $post) {
-                return view('backend.includes.tables.checkbox-status', ['value' => $post->active, 'route' => routeHelper('posts.active.toggle')."?post_id=$post->id"]);
-            })
-            ->editColumn('url', function(Post $post) {
-                return $post->url ? "<button class='btn btn-sm copy-url primary' data-url='".url($post->url)."' data-toggle='tooltip' data-bs-custom-class='tooltip-dark' data-bs-placement='top' title='".trans('buttons.copy')."' >Copy URL</button>" : '';
-            })
-            ->filterColumn('active', function ($query, $keywords) {
-                $active = stripos('TRUE', $keywords) !== false ? true : false;
-                return $query->where('active', $active);
-            })
-            ->filterColumn('content_id', function ($query, $keywords) {
-                return $query->whereHas('content', function($query) use($keywords) {
-                    return $query->where('title', 'LIKE', "%$keywords%");
+
+            ->editColumn('image', function(Post $post) {return view('backend.includes.tables.image', ['image' => $post->image, 'alt' => $post->title])->render();})
+
+            ->filterColumn('user_id', function ($query, $keywords) {
+                return $query->whereHas('user', function($query) use($keywords) {
+                    return $query->where('user.name', 'LIKE', "%$keywords%");
                 });
             })
-            ->filterColumn('operator_id', function ($query, $keywords) {
-                $keywords = explode('-', $keywords);
-                return $query->whereHas('operator', function($query) use($keywords) {
-                    $query->where('name', 'LIKE', "%".trim($keywords[0])."%")->when(isset($keywords[1]), function($query) use($keywords) {
-                        return $query->whereHas('country', function($query) use($keywords) {
-                            $query->where('name', 'LIKE', "%".trim($keywords[1])."%");
-                        });
-                    });
-                });
-            })
+
             ->editColumn('action', function(Post $post) {return view('backend.posts.actions', ['id' => $post->id])->render();})
-            ->rawColumns(['action', 'check', 'active', 'url']);
+            ->rawColumns(['action', 'check', 'image']);
     }
 
     /**
@@ -59,7 +42,7 @@ class PostDataTable extends DataTable
      */
     public function query(Post $model)
     {
-        return $model->filter()->with('content:id,title', 'operator:id,name,country_id', 'operator.country:id,name');
+        return $model->filter()->with('user:id,name');
     }
 
     /**
@@ -86,7 +69,7 @@ class PostDataTable extends DataTable
                     ->responsive(true)
                     ->parameters([
                         'initComplete' => " function () {
-                            this.api().columns([2,3,5,6]).every(function () {
+                            this.api().columns([2,3,4]).every(function () {
                                 var column = this;
                                 var input = document.createElement(\"input\");
                                 $(input).appendTo($(column.header()))
@@ -106,14 +89,15 @@ class PostDataTable extends DataTable
      */
     protected function getColumns()
     {
+
         return [
             Column::make('check')->title('<label class="skin skin-square"><input data-color="red" type="checkbox" class="switchery" id="check-all"></label>')->exportable(false)->printable(false)->orderable(false)->searchable(false)->width(15)->addClass('text-center')->footer(trans('buttons.delete')),
             Column::make('id')->title('ID')->footer('#'),
-            Column::make('published_date')->title(trans('inputs.published_date')),
-            Column::make('active')->title(trans('inputs.active')),
-            Column::make('url')->title(trans('inputs.url')),
-            Column::make('content_id')->title(trans('menu.content')),
-            Column::make('operator_id')->title(trans('menu.operator')),
+            Column::make('title')->title(trans('inputs.title')),
+            Column::make('description')->title(trans('inputs.description')),
+            Column::make('contact_phone_number')->title(trans('inputs.contact_phone_number')),
+            Column::make('image')->title(trans('title.avatar'))->footer(trans('title.avatar'))->orderable(false),
+
             Column::computed('action')->exportable(false)->printable(false)->addClass('text-center')->footer(trans('inputs.action'))->title(trans('inputs.action')),
 
         ];

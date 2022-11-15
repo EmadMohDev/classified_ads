@@ -18,7 +18,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $roles = Role::pluck('name', 'id')->toArray();
-        $behalfs = User::where('department_id', auth()->user()->department_id)->where('id', '!=', auth()->id())->pluck('name', 'id')->toArray();
+        $behalfs = User::where('id', '!=', auth()->id())->pluck('name', 'id')->toArray();
         $permissions = Permission::pluck('name', 'id')->toArray();
         return view('backend.profile.index', compact('user', 'roles', 'permissions', 'behalfs'));
     }

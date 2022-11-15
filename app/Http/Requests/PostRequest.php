@@ -23,12 +23,14 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'content_id'    => 'required|exists:contents,id',
-            'operator_id'   => 'required|array|exists:operators,id',
-            'operator_id.*' => 'required|exists:operators,id',
-            'active'        => 'nullable|in:0,1',
-            'published_date'=> 'required|date|date_format:Y-m-d',
+            'title'=> 'required',
+            'description'=> 'required',
+            'contact_phone_number'=> 'required',
+            'image'=> 'nullable',
+
+
         ];
     }
 }

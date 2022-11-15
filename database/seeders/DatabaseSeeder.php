@@ -20,34 +20,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $truncate_tables = ['menus', 'categories', 'countries', 'operators', 'aggregators', 'content_types', 'departments',
-                            'roles', 'permissions', 'routes', 'users', 'settings', 'notifications', 'contents', 'posts', 'governorates', 'cities'];
+        $truncate_tables = ['menus', 'content_types', 'roles', 'permissions', 'routes', 'users', 'settings', 'notifications',  'posts'];
 
         foreach ($truncate_tables as $table) truncateTables($table);
 
-        $this->call(GovernorateSeeder::class);
-        $this->call(CitySeeder::class);
         $this->call(MenuSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(CountrySeeder::class);
-        $this->call(OperatorSeeder::class);
+
         $this->call(RoleSeeder::class);
         $this->call(RouteSeeder::class);
-        $this->call(AggregatorSeeder::class);
-        $this->call(DepartmentSeeder::class);
+
         $this->call(SuperadminSeeder::class);
         $this->call(ContentTypeSeeder::class);
         $this->call(SettingSeeder::class);
-        // Content::factory(10)->create();
-        // Post::factory(30)->create();
 
-        // $images = $this->GetApiImage('people');
-        // User::factory(30)->create()->each(function ($user) use($images) {
-        //     try {
-        //         $index = array_rand($images);
-        //         $user->update(['image' => $this->uploadApiImage($images[$index]['src']['medium'], 'users')]);
-        //         $user->roles()->attach(Role::where('id', '!=', 1)->inRandomOrder()->first()->id);
-        //     } catch (Exception $e) {}
-        // });
     }
 }

@@ -3,6 +3,8 @@
 return [
     'please-select' => '--- الرجاء الإختيار ---',
     'title' => 'العنوان',
+    'description' => 'الوصف',
+    'contact_phone_number' => 'رقم الهاتف',
     'email' => 'البريد الإلكتروني',
     'manager' => 'المدير',
     'manager-of-manager' => 'مدير المدير',

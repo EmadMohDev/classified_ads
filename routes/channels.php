@@ -18,5 +18,5 @@ Broadcast::channel('new-email.{id}', function ($user, $id) {
 });
 
 
-Messenger\Chat\MessengerRoutes::channels();
+
 

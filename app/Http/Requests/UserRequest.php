@@ -28,13 +28,7 @@ class UserRequest extends FormRequest
             'email'         => 'required|email|unique:users,email,'.request()->route('user'),
             'password'      => 'required_without:id',
             'image'         => 'nullable',
-            'department_id' => 'required|exists:departments,id',
-            'aggregator_id' => 'nullable|exists:aggregators,id',
-            'behalf_id'     => 'required|exists:users,id',
             'roles'         => 'nullable|array',
-            'annual_credit' => 'nullable|numeric|min:0',
-            'finger_print_id' => 'nullable|numeric|min:1|unique:users,finger_print_id,'.request()->route('user'),
-            'salary_per_monthly' => 'nullable|numeric|min:1'
         ];
     }
 }

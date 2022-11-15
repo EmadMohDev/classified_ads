@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Content;
 use App\Models\ContentType;
-use App\Models\Department;
 use App\Models\Menu;
 use App\Models\Route;
 use App\Models\User;
@@ -17,14 +15,13 @@ class HomeController extends Controller
     public function index()
     {
         $tables['users']        = ['count' => User::count()];
-        $tables['departments']  = ['count' => Department::count()];
         $tables['content_types']= ['count' => ContentType::count()];
         $tables['roles']        = ['count' => Role::count()];
         $tables['permissions']  = ['count' => Permission::count()];
-        $tables['contents']     = ['count' => Content::count()];
         $tables['routes']       = ['count' => Route::count()];
         $icons = Menu::select('icon', 'name->en as name')->pluck('icon', 'name');
         $colors = self::getColor();
+
         return view('backend.home.index', compact('tables', 'icons', 'colors'));
     }
 

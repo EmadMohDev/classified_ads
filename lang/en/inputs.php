@@ -3,6 +3,8 @@
 return [
     'please-select' => '--- Please Select ---',
     'title' => 'Title',
+    'description' => 'Description',
+    'contact_phone_number' => 'Contact Phone Number',
     'email' => 'Email',
     'manager' => 'Manager',
     'manager-of-manager' => 'Manager Of Manager',

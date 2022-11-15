@@ -20,19 +20,9 @@ class UserDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('check', 'backend.includes.tables.checkbox')
-            ->editColumn('department', function(User $user) {
-                return $user->department_id
-                        ? "<a href='".routeHelper('departments.edit', $user->department_id)."' title='Edit Department' target='_blank'>".($user->department->title ?? "")."</a>"
-                        : "";
-            })
-            ->filterColumn('department', function ($query, $keywords) {
-                return $query->whereHas('department', function($query) use($keywords) {
-                    return $query->where('title', 'LIKE', "%$keywords%");
-                });
-            })
             ->editColumn('image', function(User $user) {return view('backend.includes.tables.image', ['image' => $user->image, 'alt' => $user->name])->render();})
             ->editColumn('action', function(User $user) {return view('backend.users.actions', ['id' => $user->id])->render();})
-            ->rawColumns(['action', 'check', 'image', 'department']);
+            ->rawColumns(['action', 'check', 'image']);
     }
 
     /**
@@ -43,7 +33,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->hasManager()->exceptAuth()->filter();
+        return $model->newQuery()->filter();
     }
 
     /**
@@ -58,7 +48,7 @@ class UserDataTable extends DataTable
         ->columns($this->getColumns())
         ->setTableAttribute('class', 'table table-bordered table-striped table-sm w-100 dataTable')
         ->minifiedAjax()
-        ->dom('Bfrtip')
+        ->dom('Brtip')
         ->lengthMenu([[5, 10, 20, 25, 30, -1], [5, 10, 20, 25, 30, 'All']])
         ->pageLength(5)
         ->buttons([
@@ -69,10 +59,10 @@ class UserDataTable extends DataTable
         ->responsive(true)
         ->parameters([
             'initComplete' => " function () {
-                this.api().columns([2,3,5,6,7,8,9]).every(function () {
+                this.api().columns([2,3]).every(function () {
                     var column = this;
                     var input = document.createElement(\"input\");
-                    $(input).appendTo($(column.footer()).empty())
+                    $(input).appendTo($(column.header()).empty())
                     .on('keyup', function () {
                         column.search($(this).val(), false, false, true).draw();
                     });
@@ -95,11 +85,6 @@ class UserDataTable extends DataTable
             Column::make('name')->title(trans('inputs.name')),
             Column::make('email')->title(trans('inputs.email')),
             Column::make('image')->title(trans('title.avatar'))->footer(trans('title.avatar'))->orderable(false),
-            Column::make('department')->title(trans('menu.department'))->footer(trans('menu.department'))->orderable(false),
-            Column::make('annual_credit')->title(trans('inputs.annual-credit')),
-            Column::make('finger_print_id')->title(trans('inputs.finger-print-id')),
-            Column::make('salary_per_monthly')->title(trans('inputs.salary')),
-            Column::make('insurance_deduction')->title(trans('inputs.insurance-deduction')),
             Column::computed('action')->exportable(false)->printable(false)->addClass('text-center')->footer(trans('inputs.action'))->title(trans('inputs.action')),
         ];
     }

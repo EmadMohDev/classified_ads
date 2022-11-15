@@ -35,8 +35,10 @@ class SaveRoutesInDatabase extends Command
      */
     public function handle()
     {
+
         foreach (FacadesRoute::getRoutes()->getRoutes() as $route)
         {
+
             $action = $route->getAction();
             if ( !isset($action['controller']) || !in_array($action['namespace'], $this->namespaces))
                 continue;

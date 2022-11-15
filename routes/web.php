@@ -24,5 +24,5 @@ Route::get('change-theme/{theme?}', function($theme = null) {
     return redirect()->back();
 })->name('change.theme');
 
-Messenger\Chat\MessengerRoutes::routes();
+
 

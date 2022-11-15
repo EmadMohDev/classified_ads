@@ -41,50 +41,16 @@ return [
     'users' => 'Users',
     'user' => 'User',
 
-    // DEPARTMENTS
-    'departments' => 'Departments',
-    'department' => 'Department',
-
-    // AGGREGATORS
-    'aggregators' => 'Aggregators',
-    'aggregator' => 'Aggregator',
-
-    // COUNTRIES
-    'countries' => 'Countries',
-    'country' => 'Country',
-
-    // OPERATORS
-    'operators' => 'Operators',
-    'operator' => 'Operator',
-
-    // CATEGORIES
-    'categories' => 'Categories',
-    'category' => 'Category',
-    'subs' => 'Sub Categories',
 
     // CONTENT TYPES
     'content_types' => 'Content Types',
     'content_type' => 'Content Type',
 
-    // CONTENTS
-    'contents' => 'Contents',
-    'content' => 'Content',
 
     // POSTS
     'posts' => 'Posts',
     'post' => 'Post',
 
-    // GOVERNORATES
-    'governorates' => 'Governorates',
-    'governorate' => 'Governorate',
-
-    // CITIES
-    'cities' => 'Cities',
-    'city' => 'City',
-
-    // RBTS
-    'rbts' => 'Rbts',
-    'rbt' => 'Rbt',
 
     // NOTIFICATIONS
     'notifications' => 'Notifications',

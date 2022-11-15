@@ -19,7 +19,7 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
     */
     public function collection()
     {
-        return User::with('department:id,title', 'aggregator', 'behalf')->get();
+        return User::all();
     }
 
     public function map($user): array
@@ -28,18 +28,12 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
             $user->finger_print_id,
             $user->name,
             $user->email,
-            $user->behalf->name ?? '',
-            $user->aggregator->title ?? '',
-            $user->department->title ?? '',
-            $user->annual_credit,
-            $user->salary_per_monthly,
-            $user->insurance_deduction,
         ];
     }
 
     public function headings(): array
     {
-        return ["Finger ID", "Name", "Email", "Behalf", "Aggregator", "Department", "Annual Credit", "Salary", "Insurance Deduction"];
+        return [ "Name", "Email",];
     }
 
     public function styles(Worksheet $sheet)

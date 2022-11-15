@@ -7,80 +7,62 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
 
-        {{-- START CONTENT --}}
-        <div class="form-group mb-5">
-            <label class="required">@lang('inputs.select-data', ['data' => trans('menu.content')])</label>
-            <select class="form-control" data-control="select2" name="content_id" data-placeholder="--- @lang('inputs.select-data', ['data' => trans('menu.content')]) ---" >
-                @if (count($contents) != 1)<option value="">@lang('inputs.please-select')</option> @endif
-                @foreach ($contents as $id => $title)
-                    <option value="{{ $id }}" @selected(isset($row) && $row->content_id == $id || old('content_id') == $id)>{{ $title }}</option>
-                @endforeach
-            </select>
-            @include('layouts.includes.backend.validation_error', ['input' => 'content_id'])
-        </div>
-        {{-- END CONTENT --}}
 
-        {{-- START OPERATOR --}}
-        <div class="form-group mb-5">
-            <label class="required">@lang('inputs.select-data', ['data' => trans('menu.operator')])</label>
-            <select class="form-control" data-control="select2" name="operator_id[]" {{ isset($row) ?: "multiple" }} data-placeholder="--- @lang('inputs.select-data', ['data' => trans('menu.operator')]) ---" required>
-                <option value="">@lang('inputs.please-select')</option>
-                @foreach ($operators as $operator)
-                    <option value="{{ $operator->id }}" @selected(isset($row) && $row->operator_id == $operator->id || old('operator_id') == $operator->id)>{{ "$operator->name - {$operator->country->name}" }}</option>
-                @endforeach
-            </select>
-            @include('layouts.includes.backend.validation_error', ['input' => 'operator_id'])
-        </div>
-        {{-- END OPERATOR --}}
 
-        {{-- START PUBLISHED DATE --}}
+
         <div class="form-group mb-5">
-            <label class="required">@lang('inputs.published_date')</label>
+            <label class="required">@lang('inputs.title')</label>
             <div class="input-group mb-2">
-                <span class="input-group-text"> <i class="fas fa-share"></i> </span>
-                <input type="text" class="form-control pickadate-selectors" name="published_date" placeholder=" @lang('inputs.published_date')" value="{{ $row->published_date ?? (old('published_date') ?? date('Y-m-d')) }}" required>
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                <input type="text" class="form-control" name="title" value="{{ $row->title  ?? old('title ') }}" placeholder="@lang('inputs.title ')" required>
             </div>
-            @include('layouts.includes.backend.validation_error', ['input' => 'published_date'])
+            @include('layouts.includes.backend.validation_error', ['input' => 'title'])
         </div>
-        {{-- END PUBLISHED DATE --}}
 
-        {{-- START ACTIVE --}}
+
+
+
+
+
+
+
         <div class="form-group mb-5">
-            <div>
-                <div class="form-check form-switch form-check-custom">
-                    <label class="required" for="active">@lang('inputs.active')</label>
-                    <input type="checkbox" name="active" id="active" class="form-check-input cursor-pointer" value="1" @checked(isset($row) ? $row->active : true)>
-                </div>
+            <label class="required">@lang('inputs.description')</label>
+            <div class="input-group mb-2">
+                <span class="input-group-text"> <i class="fa fa-id-card"></i> </span>
+                <textarea class="form-control" cols="15" rows="10" class="ckeditor"  name="description"
+                placeholder="@lang('inputs.description')"   required>
+                {{ $row->description ?? old('description') }}</textarea>
             </div>
-            @include('layouts.includes.backend.validation_error', ['input' => 'active'])
+            @include('layouts.includes.backend.validation_error', ['input' => 'description'])
         </div>
-        {{-- END ACTIVE --}}
+
+
+
+
+
+        <div class="form-group mb-5">
+            <label class="required">@lang('inputs.contact_phone_number')</label>
+            <div class="input-group mb-2">
+                <span class="input-group-text"> <i class="fa fa-mobile"></i> </span>
+                <input type="text" class="form-control" name="contact_phone_number" value="{{ $row->contact_phone_number ?? old('contact_phone_number') }}" placeholder="@lang('inputs.contact_phone_number')" required>
+            </div>
+            @include('layouts.includes.backend.validation_error', ['input' => 'contact_phone_number'])
+        </div>
+
+
+
+
+        <div class="col-md-3">
+            <label class="required">@lang('inputs.upload-image')</label>
+            @include('backend.includes.forms.input-file', ['image' => isset($row) && $row->image ? url($row->image) : null, 'alt' => $row->name ?? null])
+        </div>
+
+
+
+
+
 
     </div>
 </div>
 
-@push('script')
-    <script src="{{ assetHelper('vendors/js/pickers/pickadate/picker.js') }}"></script>
-    <script src="{{ assetHelper('vendors/js/pickers/pickadate/picker.date.js') }}"></script>
-
-    <script>
-        $(function() {
-            let min = '2022-06-20';
-            let max = '2022-08-24';
-            $('.pickadate-selectors').pickadate({
-                labelMonthNext: 'Next month',
-                labelMonthPrev: 'Previous month',
-                labelMonthSelect: 'Pick a Month',
-                labelYearSelect: 'Pick a Year',
-                selectMonths: true,
-                selectYears: true,
-                format: 'yyyy-mm-dd',
-                min: min,
-                max: max,
-                today: 'Today',
-                close: 'Close',
-                clear: 'Clear'
-            });
-        });
-    </script>
-@endpush

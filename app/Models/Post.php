@@ -12,27 +12,27 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['published_date', 'active', 'url', 'content_id', 'operator_id', 'user_id'];
+    protected $fillable = ['title', 'description', 'contact_phone_number', 'image', 'user_id'];
 
-    public function content()
-    {
-        return $this->belongsTo(Content::class);
-    }
 
-    public function operator()
-    {
-        return $this->belongsTo(Operator::class);
-    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value && file_exists('uploads/posts/' . $value) ? "uploads/posts/$value" : null,
+        );
+    }
+
     public function scopeFilter(Builder $builder)
     {
-        return $builder->when(request('content'), function($query) {
-            return $query->where('content_id', request('content'));
+        return $builder->when(request('users'), function($query) {
+            return $query->where('user', request('user'));
         });
     }
 
@@ -41,16 +41,15 @@ class Post extends Model
         parent::boot();
 
         static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('published_date', 'DESC')->orderBy('operator_id', 'ASC');
+            $builder->orderBy('id', 'DESC');
         });
 
         self::creating(function($model) {
             $model->user_id = auth()->id();
-            $model->url = "content/$model->content_id?".OP_PARAM_NAME."=$model->operator_id";
         });
 
         self::updating(function($model) {
-            $model->url = "content/$model->content_id?".OP_PARAM_NAME."=$model->operator_id";
+            $model->user_id = auth()->id();
         });
     }
 }

@@ -24,8 +24,7 @@ Route::controller('UserController')->group(function () {
     Route::get('users/excel/import', 'import')->name('users.excel.import.form');
     Route::post('users/excel/import', 'saveImport')->name('users.excel.import');
     Route::get('users/search/form', 'search')->name('users.search.form');
-    Route::get('departments/{department}/users','index')->name('departments.users.index');
-    Route::get('departments/{department}/users/create','create')->name('departments.users.create');
+
 });
 
 
@@ -38,13 +37,6 @@ Route::controller('ProfileController')->group(function () {
     Route::put('profile/permissions', 'permissions')->name('profile.permissions');
 });
 
-
-Route::resource('departments','DepartmentController');
-Route::post('departments/multidelete', 'DepartmentController@multidelete')->name('departments.multidelete');
-
-Route::resource('aggregators','AggregatorController')->except('show');
-Route::post('aggregators/multidelete', 'AggregatorController@multidelete')->name('aggregators.multidelete');
-
 Route::resource('roles','RoleController');
 Route::controller('RoleController')->group(function () {
     Route::post('roles/get/permissions', 'getPermissions')->name('roles.permissions');
@@ -56,50 +48,21 @@ Route::resource('permissions','PermissionController')->except('show');
 Route::post('permissions/multidelete', 'PermissionController@multidelete')->name('permissions.multidelete');
 
 
-Route::resource('countries','CountryController')->except('show');
-Route::post('countries/multidelete', 'CountryController@multidelete')->name('countries.multidelete');
-
-
-Route::resource('operators','OperatorController')->except('show');
-Route::controller('OperatorController')->group(function () {
-    Route::post('operators/multidelete', 'multidelete')->name('operators.multidelete');
-    Route::get('countries/{country}/operators','index')->name('countries.operators.index');
-    Route::get('countries/{country}/operators/create','create')->name('countries.operators.create');
-});
-
-
 Route::resource('settings','SettingController')->except('show');
 Route::controller('SettingController')->group(function () {
     Route::post('settings/type/input', 'getTypeInput')->name('settings.type.input');
     Route::post('settings/multidelete', 'multidelete')->name('settings.multidelete');
 });
 
-Route::resource('categories','CategoryController')->except('show');
-Route::controller('CategoryController')->group(function () {
-    Route::get('categories/{category}/subs', 'index')->name('categories.subs.index');
-    Route::get('categories/{category}/subs/create', 'create')->name('categories.subs.create');
-    Route::post('categories/multidelete', 'multidelete')->name('categories.multidelete');
-});
-
-
 Route::resource('content_types','ContentTypeController')->except('show');
 Route::post('content_types/multidelete', 'ContentTypeController@multidelete')->name('content_types.multidelete');
 Route::post('content_types/visible/toggle/{content_type}', 'ContentTypeController@toggleVisible')->name('content_types.visible.toggle');
 
-Route::resource('contents','ContentController');
-Route::controller('ContentController')->group(function () {
-    Route::post('contents/type/input', 'getTypeInput')->name('contents.type.input');
-    Route::post('contents/multidelete', 'multidelete')->name('contents.multidelete');
-});
+
 
 Route::resource('posts','PostController');
 Route::controller('PostController')->group(function () {
-    Route::get('contents/{content}/posts', 'index')->name('contents.posts.index');
-    Route::get('contents/{content}/posts/create', 'create')->name('contents.posts.create');
     Route::post('posts/multidelete', 'multidelete')->name('posts.multidelete');
-    Route::post('posts/active-toggle', 'activeToggle')->name('posts.active.toggle');
-    Route::get('posts/{post}/short-url', 'shortUrlForm')->name('posts.short.url');
-    Route::post('posts/{post}/short-url', 'shortUrl')->name('posts.short.url');
 });
 
 
@@ -124,24 +87,7 @@ Route::post('emails/list', 'EmailController@list')->name('emails.list');
 Route::post('emails/new/{limit?}', 'EmailController@new')->name('emails.list.new');
 
 
-Route::resource('governorates', 'GovernorateController')->except('show');
-Route::post('governorates/multidelete', 'GovernorateController@multidelete')->name('governorates.multidelete');
 
-
-Route::resource('cities', 'CityController')->except('show');
-Route::controller('RbtController')->group(function () {
-    Route::post('cities/multidelete', 'multidelete')->name('cities.multidelete');
-    Route::get('governorates/{governorate}/cities', 'index')->name('governorates.cities.index');
-    Route::get('governorates/{governorate}/cities/create', 'create')->name('governorates.cities.create');
-});
-
-
-Route::resource('rbts', 'RbtController');
-Route::controller('RbtController')->group(function () {
-    Route::post('rbts/multidelete', 'multidelete')->name('rbts.multidelete');
-    Route::get('contents/{content}/rbts', 'index')->name('contents.rbts.index');
-    Route::get('contents/{content}/rbts/create', 'create')->name('contents.rbts.create');
-});
 
 
 Route::post('search', 'SearchController@index')->name('search');
