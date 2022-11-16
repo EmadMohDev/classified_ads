@@ -1,0 +1,393 @@
+{
+	"info": {
+		"_postman_id": "89cee260-2d43-4604-8c4a-ad9317960789",
+		"name": "Ads",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2085317"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Forget Password",
+					"item": [
+						{
+							"name": "Send Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "emad@ivas.com.eg",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{ADS_URL}}/password/forget",
+									"host": [
+										"{{ADS_URL}}"
+									],
+									"path": [
+										"password",
+										"forget"
+									]
+								},
+								"description": "To forget user password\n\n***\\[POST\\] password/forget***\n\nform data:\n\n**email => required | email | exists in users table**\n\nafter submit, will sent pincode to this email"
+							},
+							"response": []
+						},
+						{
+							"name": "Check OPT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "emad@ivas.com.eg",
+											"type": "text"
+										},
+										{
+											"key": "pincode",
+											"value": "LJ2Y95",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{ADS_URL}}/password/check-opt",
+									"host": [
+										"{{ADS_URL}}"
+									],
+									"path": [
+										"password",
+										"check-opt"
+									]
+								},
+								"description": "To check the opt is valide\n\n***\\[POST\\] password/check-opt***\n\nform data:\n\n**email => required | email | exists in users table**\n\n***pincode => required | string***"
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "pincode",
+											"value": "LJ2Y95",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "emad@ivas.com.eg",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "12345678",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{ADS_URL}}/password/reset",
+									"host": [
+										"{{ADS_URL}}"
+									],
+									"path": [
+										"password",
+										"reset"
+									]
+								},
+								"description": "To reset a password after sent email\n\n***\\[POST\\] password/reset***\n\nform data:\n\n**email => required | email | exists in users table**\n\n**pincode => required | string | length:6 \\[from email\\]**\n\n**password => required | string | min:6 | confirmed**\n\n**password_confirmation => required | string | min:6**"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"emad mohamed\",\r\n    \"email\":\"emad3@gmail.com\",\r\n    \"password\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ADS_URL}}/register",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "emad@ivas.com.eg",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ADS_URL}}/login",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{ADS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ADS_URL}}/details",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{ADS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ADS_URL}}/posts",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						},
+						"description": "To list all users\n\n***\\[GET\\] users/***\n\ncan add some optional parameters:\n\n***name: to filter users per name***\n\n***limit: To get limit of rows with pagination \\[default = 10\\]***\n\n**role: To list all users per role \\[employee or manager\\]**\n\n**active : To list users per active status \\[pending / banned / active\\]**\n\n***EX => users?name=super*&limit=1&role=manager**"
+					},
+					"response": []
+				},
+				{
+					"name": "List posts for specific user with id = 2",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{ADS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ADS_URL}}/posts?user=2",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "2"
+								}
+							]
+						},
+						"description": "To list all users\n\n***\\[GET\\] users/***\n\ncan add some optional parameters:\n\n***name: to filter users per name***\n\n***limit: To get limit of rows with pagination \\[default = 10\\]***\n\n**role: To list all users per role \\[employee or manager\\]**\n\n**active : To list users per active status \\[pending / banned / active\\]**\n\n***EX => users?name=super*&limit=1&role=manager**"
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{ADS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ADS_URL}}/posts/3",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"posts",
+								"3"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "js",
+									"disabled": true
+								}
+							]
+						},
+						"description": "To list all users\n\n***\\[GET\\] users/***\n\ncan add some optional parameters:\n\n***name: to filter users per name***\n\n***limit: To get limit of rows with pagination \\[default = 10\\]***\n\n**role: To list all users per role \\[employee or manager\\]**\n\n**active : To list users per active status \\[pending / banned / active\\]**\n\n***EX => users?name=super*&limit=1&role=manager**"
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{ADS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "post3",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description3",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "api@ivas2.com2s",
+									"type": "text"
+								},
+								{
+									"key": "contact_phone_number",
+									"value": "01223872695",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/emad/Downloads/DxOkx6qC9MZAlLdDpdbWvGGxLc9jOYmUo9sMKuVP.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ADS_URL}}/posts",
+							"host": [
+								"{{ADS_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						},
+						"description": "To create new user\n\n**\\[POST\\] users/**\n\nForm Data:\n\n**name => required | string**\n\n**email => required | email | unique in table users**\n\n**password => required | string | min:8**\n\n**roles => nullable**\n\n**image => nullable| image | mimes:jpg,png,jpeg**\n\n**department_id => required | integer| from departments table**\n\n**job_title => required | string | min:5**\n\n**mobile_number => nullable| string | min:12**"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

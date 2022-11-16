@@ -29,7 +29,7 @@ class PostController extends ApiController
      */
     public function getQuery() :object
     {
-        return $this->model::filter();
+        return $this->model::ExceptAuth()->filter();
     }
 
     /**

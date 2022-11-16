@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
@@ -22,11 +23,24 @@ class Post extends Model
     }
 
 
+protected function description(): Attribute
+{
+    return Attribute::make(
+        get: fn ($value) => Str::limit($value , 512 , '...'),
+    );
+}
+
+
     protected function image(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value && file_exists('uploads/posts/' . $value) ? "uploads/posts/$value" : null,
         );
+    }
+
+    public function scopeExceptAuth($query)
+    {
+        return $query->where('user_id', '!=', auth()->id());
     }
 
     public function scopeFilter(Builder $builder)

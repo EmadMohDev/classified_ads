@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\DescriptionLimit ;
+
 
 class PostRequest extends FormRequest
 {
@@ -26,7 +28,7 @@ class PostRequest extends FormRequest
 
         return [
             'title'=> 'required',
-            'description'=> 'required',
+            'description'=> ['required' , new DescriptionLimit ],
             'contact_phone_number'=> 'required',
             'image'=> 'nullable',
 
