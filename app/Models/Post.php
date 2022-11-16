@@ -31,8 +31,8 @@ class Post extends Model
 
     public function scopeFilter(Builder $builder)
     {
-        return $builder->when(request('users'), function($query) {
-            return $query->where('user', request('user'));
+        return $builder->when(request('user'), function($query) {
+            return $query->where('user_id', request('user'));
         });
     }
 

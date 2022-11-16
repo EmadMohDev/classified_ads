@@ -20,7 +20,7 @@ class RegisterController extends BasicApiController
         $user = self::createUser($request);
         return [
             'token' => "Bearer ".$user->createToken(env('API_HASH_TOKEN', 'ClubApp'))->accessToken,
-            'message' => trans('permissions.account not acctive'),
+            'message' => trans('flash.row created', ['model' => trans('menu.user')]) ,
             'user'  => new UserResource($user),
         ];
     }
