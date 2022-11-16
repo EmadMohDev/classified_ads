@@ -1,6 +1,6 @@
 ## Make clone to project
 ```
-git clone https://EmadMohDev/MahmoudKon/ads.git
+git clone https://EmadMohDev/classified_ads.git
 ```
 
 ## Go inside the project
