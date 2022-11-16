@@ -59,12 +59,13 @@ class ApiPostControllerTest extends TestCase
 
     public function test_api_store_post()
     {
+        $user = User::first();
         $data = [
             "title" => "post1",
             "description" => "Description1",
             "contact_phone_number" => "01223872695",
            // "image" => 98,
-            "user" => 1
+            "user" => $user->id
         ];
 
         $this->json('post', "api/posts", $data, ['Accept' => 'application/json', 'Authorization' => env('API_TEST_AUTH_TOKEN')])
