@@ -1,16 +1,13 @@
 ## Make clone to project
 ```
-git clone https://github.com/MahmoudKon/laravel_9.git
+git clone https://EmadMohDev/MahmoudKon/ads.git
 ```
 
 ## Go inside the project
 ```
-cd laravel_9
+cd ads
 ```
 
-## Create database
-* copy .env.example and rename it to .env
-* set database config in your inv file
 
 ## Create key
 ```
@@ -19,7 +16,7 @@ php artisan key:generate
 
 ## Install composer
 ```
-composer install --ignore-platform-reqs
+composer install 
 
 ```
 
@@ -32,3 +29,12 @@ php artisan migrate --seed
 ```
 php artisan serve
 ```
+
+
+# Project description:
+<p>This is demo to make post CRUD on the backend and their Apis</p>
+<p>there is postman collection on this folder  Api Collection please import the postman collection and it's global variables  
+</p>
+
+
+✔Technologies : PHP8 & Laravel9 & Unit Testing

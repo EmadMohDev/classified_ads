@@ -1,0 +1,22 @@
+{
+	"id": "df9be96c-2ae0-4e8c-8c22-7fd703988be2",
+	"values": [
+		
+		{
+			"key": "ADS_URL",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ADS_TOKEN",
+			"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjc2YzQ3OTEzYzhiNDdmN2RjYjZiNTJmYzEyOWExZjlkMWE3ZWFiZDRmNGNhMjlkYzg3MDc1MTM1ZDYyY2ZiYTI1ZjJiNjFmZWZmZGVmYWEiLCJpYXQiOjE2Njg1OTUwNTQuNzY2NDgsIm5iZiI6MTY2ODU5NTA1NC43NjY0ODUsImV4cCI6MTcwMDEzMTA1NC41ODE5MDgsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.JFm-4wH4XqPMtcWhlCwXdc3E1bWCMT6IANGLYr-aLBQkoi3RbClurqgQ1zSMZ4zByaixD-tEZEoSgrUUb5sh-PD9-76PtrYcHu_4ld0b8q2QMQF7aHBZCRHMd4N8i2MOCFB0ZXxr4M3eCzjIHczAOmS2AgcIOu52V3PiobOI-IskoloGQLGeYsXNmjoY7Za-tRUS9jyjE_DUJlQtjL3bINo50W3FyYdWgxmkJ8S1vyEL8rpeC1ZYwH_oRoj_-k2Pg084Ib26pKHf0P3djjn-W391ydWhYUH1eaW9SSmlZe-VV7mKNRyrerLMJ6wipWaZfaVwYNOkXGmH6EIjWMJTvVcUU-2gZFabJoKI5dPSP3kq4r4GBaTMflIbxTFozc2BqGJe5Fwbei8qd9cf9Noc2JRzVQRnPGuzadIRfgnj6TTBhy3C-_AqylFwRcLD2FfXumLwhroW1DlN5zhuu9g3AimBrAh9NFGi1QH8U_y8n6TNR4U4BizOEYgn6i3lFiLzg7lWBboSkl0PSz2IJxnjjonBTiKbEQD25dCW_HQEwstCJOrteg6XnPdwTKxluDoFM5GGdc12sMs3zruCbGUnQNZoqQo89Y8Xb-nmG5hNE7iAyDzF76IzrntGWW_iNg8KTFJuPH_nZqY74_8Ha3TAXRMWhblFfYKejflTYJuZBwQ",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-11-16T14:49:40.625Z",
+	"_postman_exported_using": "Postman/10.0.41"
+}
